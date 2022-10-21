@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block titulo %}Recetas{% endblock %}
+{% block contenido %}
+
+
+{% include '_menu.html' %}
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-wrap">
+        <div class="col-md-10 col-lg-7">
+            <h1>Bienvenido, {{session.usuario}}</h1>
+            <h3>{{recipe.name}}</h3>
+            <p>Posteado por: {{recipe.usuario_nombre}} {{recipe.usuario_apellido}}</p>
+            <div class="card text-bg-light mb-3" style="max-width: 35rem;">
+                <div class="card-body">
+                    <p class="card-text"><strong>Descripcion:</strong> {{recipe.description}}</p>
+                    <p class="card-text"><strong>Menos 30 minutos:</strong>{% if recipe.under_30 == 0 %} No {% else %} Si{% endif %}</p>
+                    <p class="card-text" style="white-space: pre-line" ><strong>Ingredientes:</strong> <br> {{recipe.instructions}}</p>
+                    <p class="card-text"><strong>Fecha de elaboracion:</strong> {{recipe.date_made}}</p>
+                </div>
+
+            </div>
+            <form action="/send_msg/{{recipe.id}}" enctype=multipart/form-data method="post">
+                <div class="mb-3" style="max-width: 35rem;">
+                    <label for="msg" class="form-label"style="white-space: pre-line">Mensaje email</label>
+                    <textarea type="description" name="msg" class="form-control form-control-sm" id="description" placeholder="Enviar mensaje al creador de la receta"></textarea>
+                </div>
+                <button type="submit" class="btn btn-success">Enviar</button>
+            </form>
+        </div>
+        <div class="mt-15 col-md-10 col-lg-4">
+            <img src="/static/uploads/{{recipe.image}}" width="500" class=" rounded float-start" alt="Imagen de receta">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

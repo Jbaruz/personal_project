@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block titulo %}Creacion de nuevas{% endblock %}
+{% block contenido %}
+
+
+{% include '_menu.html' %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-10 col-lg-7">
+            <h1>Hola {{session.usuario}} estas dispuesto a editar la actual receta?</h1>
+            <img src="/static/images/recipe_edit.jpeg" class="img-thumbnail" class=" rounded float-start" alt="Foto de edicion">
+        </div>
+        <div class="col-md-10 col-lg-4">
+
+            <h4>Editar la receta </h4>
+            <hr>
+
+            <form action="/process/edit/recipes/{{recipe['id']}}" enctype=multipart/form-data method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Titulo</label>
+                    <input value="{{recipe['name']}}" type="text" name="name" class="form-control form-control-sm" id="name" aria-describedby="nameHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripcion</label>
+                    <textarea type="description" name="description" class="form-control form-control-sm" id="description">{{recipe['description']}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="instructions" class="form-label">Ingredientes</label>
+                    <textarea type="instructions" name="instructions" class="form-control form-control-sm" id="instructions">{{recipe['instructions']}}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="date_made" class="form-label">Fecha de elaboracion / cocción</label>
+                    <input value="{{recipe.date_made}}" type="date" name="date_made" class="form-control form-control-sm" id="date_made" aria-describedby="fechaElaboracionHelp">
+                </div>
+                <label for="form-label">Menos 30 minutos?</label>
+                <div class="form-check">
+                    {% if recipe['under_30']==1 %}
+                    <input class="form-check-input" type="radio" name="under_30" id="under_301" value="1" checked>
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="under_30" id="under_301" value="1">
+                    {% endif %}
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Si
+                    </label>
+                </div>
+                <div class="form-check">
+                    {% if recipe['under_30']==0 %}
+                    <input class="form-check-input" type="radio" name="under_30" id="under_302" value="0" checked >
+                    {% else %}
+                    <input class="form-check-input" type="radio" name="under_30" id="under_302" value="0">
+                    {% endif %}
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-success">Ingresar al Sistema</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
