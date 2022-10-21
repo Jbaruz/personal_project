@@ -1,5 +1,5 @@
 # Para tener en cuenta.
-
+### para que funciona renombra el archivo ".envELIMINA" a ".env", para que funcione
 ```
 APP_SECRET_KEY=poner cualquier cosa
 BASEDATOS_HOST=localhost
